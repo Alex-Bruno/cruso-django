@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Delete Post {% endblock %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card">
+        <div class="card-header">
+            Deletar Postagem
+        </div>
+
+        <div class="card-body">
+            <form action="" method="POST"> {% csrf_token %}
+                <p>Você tem certeza, que deseja excluir o registro "{{ post.titulo }}" ?</p>
+                <br />
+
+                <input class="btn btn-danger" type="submit" value="Confirmar">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

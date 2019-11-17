@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Blog - Detalhe {% endblock title %}
+{% block header %}
+<!-- Page Header -->
+
+{% if object.imagem %}
+<header class="masthead" style="background-image: url({{ object.imagem.url }})">
+{% else %}
+<header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+{% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ object.titulo }}</h1>           
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+{% endblock header %}  
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="col-lg-8 col-md-10 mx-auto">
+    <div class="post-preview">
+        <h2 class="post-title">
+            {{ post.titulo }}
+        </h2>
+        <h3 class="post-subtitle">
+            {{ post.conteudo | safe }}
+        </h3>
+        <p class="post-meta">Posted by
+            <a href="#">{{ post.user }}</a>
+            on {{ post.criado }}
+        </p>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="card">
+        <div class="card-body">
+            <a href="{{ object.get_absolute_url_edit }}" class="btn btn-primary">+ Editar</a>
+            <a href="{{ object.get_absolute_url_delete }}" class="btn btn-danger">+ Deletar</a>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+</div>
+{% endblock %}
